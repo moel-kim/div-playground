@@ -1,12 +1,12 @@
-import { PetApiFactory } from '../api';
 import {
   useQueryErrorResetBoundary,
   useSuspenseQuery,
-} from '@tanstack/react-query';
-import { SimpleCard } from '../components/SimpleCard';
-import { pulse } from '../keyframes/shim';
-import { SmartSuspense } from '../components/SmartSuspense';
-import { ErrorBoundary } from 'react-error-boundary';
+} from "@tanstack/react-query";
+import { SimpleCard } from "../components/SimpleCard";
+import { pulse } from "../keyframes/shim";
+import { SmartSuspense } from "../components/SmartSuspense";
+import { ErrorBoundary } from "react-error-boundary";
+import { PetApiFactory } from "@/api-gen";
 
 const pet = PetApiFactory();
 
@@ -14,16 +14,16 @@ const RenderPage = () => {
   const {
     data: { data },
   } = useSuspenseQuery({
-    queryKey: ['pet'],
+    queryKey: ["pet"],
     queryFn: () => {
       // Uncomment this to test the error boundary
       // throw new Error('This is an error');
-      return pet.getPetById({ petId: 1 });
+      return pet.getPetById({ petId: 2 });
     },
   });
 
   return (
-    <SimpleCard.Make title={data.name} description={data.status ?? 'unknown'} />
+    <SimpleCard.Make title={data.name} description={data.status ?? "unknown"} />
   );
 };
 
@@ -36,11 +36,11 @@ export const MainPage = () => {
       fallbackRender={({ resetErrorBoundary }) => (
         <SimpleCard.Skeleton
           css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
           }}
         >
           There was an error!
@@ -58,24 +58,24 @@ export const MainPage = () => {
           >
             <div
               css={{
-                padding: '10px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
+                padding: "10px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
               }}
             >
               <div
                 css={{
-                  width: '100%',
-                  height: '40px',
-                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                  width: "100%",
+                  height: "40px",
+                  backgroundColor: "rgba(0, 0, 0, 0.2)",
                 }}
               />
               <div
                 css={{
-                  width: '100%',
-                  height: '40px',
-                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                  width: "100%",
+                  height: "40px",
+                  backgroundColor: "rgba(0, 0, 0, 0.2)",
                 }}
               />
             </div>
