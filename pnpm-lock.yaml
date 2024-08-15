@@ -82,6 +82,9 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@tanstack/eslint-plugin-query':
+        specifier: ^5.12.1
+        version: 5.12.1(eslint@8.56.0)(typescript@5.2.2)
       '@types/react':
         specifier: ^18.2.43
         version: 18.2.45
@@ -1324,6 +1327,18 @@ packages:
     dependencies:
       tslib: 2.6.2
     dev: false
+
+  /@tanstack/eslint-plugin-query@5.12.1(eslint@8.56.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-FuG/mN9cUO8KlT7KJzl8Yiw55uyXz1vzxXfoMnBbgiH8vk5WtUbEMdFeDF4ujgO+VSKR10uDdZ1+TIOpHhDUfQ==}
+    peerDependencies:
+      eslint: ^8.0.0
+    dependencies:
+      '@typescript-eslint/utils': 5.62.0(eslint@8.56.0)(typescript@5.2.2)
+      eslint: 8.56.0
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: true
 
   /@tanstack/query-core@5.14.2:
     resolution: {integrity: sha512-QmoJvC72sSWs3hgGis8JdmlDvqLfYGWUK4UG6OR9Q6t28JMN9m2FDwKPqoSJ9YVocELCSjMt/FGjEiLfk8000Q==}
