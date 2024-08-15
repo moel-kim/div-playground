@@ -9,6 +9,8 @@ const TestPage = () => {
     O.getWithDefault<number>(0) // → 30
   ); // → 30
 
+  console.log(data);
+
   return <div>{data}</div>;
 };
 

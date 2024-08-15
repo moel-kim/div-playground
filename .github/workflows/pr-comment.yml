@@ -9,23 +9,33 @@ jobs:
     if: contains(github.event.comment.html_url, '/pull/') # check if the comments come from pull request, exclude those from issue.
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        if: contains(github.event.comment.body, '/deploy') # check the comment if it contains the keywords
-        run: |
-          echo start deploy
-      - name: Add deploy comment # https://stackoverflow.com/questions/58066966/commenting-a-pull-request-in-a-github-action
-        if: contains(github.event.comment.body, '/deploy') # check the comment if it contains the keywords
+      - name: Make Status Pending
+        if: contains(github.event.comment.body, '/in-review') # check the comment if it contains the keywords
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            # make status pending
+            github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🚀'
+              sha: context.sha,
+              state: 'pending',
+              description: 'In review',
+              context: 'In review'
             })
-      - name: Test
-        if: contains(github.event.comment.body, '/test') # check the comment if it contains the keywords
-        run: |
-          echo start test
+      - name: Make Status Success
+        if: contains(github.event.comment.body, '/approve') # check the comment if it contains the keywords
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            # make status success
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              description: 'Approved',
+              context: 'Approved'
+            })
