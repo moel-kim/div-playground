@@ -1,7 +1,8 @@
 import './App.css';
+import TestPage from './belt/TestPage';
 
 function App() {
-  return <div>abc</div>;
+  return <TestPage />;
 }
 
 export default App;
