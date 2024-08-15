@@ -1,21 +1,21 @@
-name: Pull request comment
+name: PR Review Check
 
 on:
-  pull_request:
-    branches:
-      - main
   issue_comment:
-    types: [created, edited, deleted]
+    types: [created]
 
 jobs:
-  pull_request_comment:
-    if: contains(github.event.comment.html_url, '/pull/') # check if the comments come from pull request, exclude those from issue.
+  check-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Check In Review
-        if: contains(github.event.comment.body, '/in-review') # check the comment if it contains the keywords
-        run: exit 1
-      - name: Check Approve
-        if: "!contains(github.event.comment.body , '/in-review')"
-        run: exit 0
+      - name: Check PR review comment
+        id: pr_review_comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const payload = github.context.payload;
+            if (payload.comment && payload.comment.body.includes('/in-review')) {
+              core.setFailed('Merge is disabled because of /in-review comment.');
+            }
+            console.log('No /in-review comment found. Merge is allowed.');

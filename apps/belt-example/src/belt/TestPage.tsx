@@ -10,6 +10,7 @@ const TestPage = () => {
   ); // → 30
 
   console.log(data);
+  console.log(data);
 
   return <div>{data}</div>;
 };
