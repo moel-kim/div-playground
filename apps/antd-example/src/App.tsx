@@ -1,11 +1,11 @@
-import { Flex, Space } from 'antd';
+import { Flex, Space } from "antd";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     // antd does not support polymorphism
-    <Flex component="abc">
+    <Flex>
       <Space direction="horizontal"></Space>
     </Flex>
   );
