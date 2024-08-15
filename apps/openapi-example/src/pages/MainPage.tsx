@@ -49,7 +49,7 @@ export const MainPage = () => {
       )}
     >
       <SmartSuspense
-        fallbackMinDurationMs={500}
+        fallbackMinDurationMs={1500}
         fallback={
           <SimpleCard.Skeleton
             css={{
